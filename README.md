@@ -1,6 +1,6 @@
 # HammingJS
 
-[Short project description]
+Hamming codes are a family of linear error-correcting codes. Hamming codes can detect one-bit and two-bit errors, or correct one-bit errors without detection of uncorrected errors.
 
 ## Getting started
 
