@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "nodemon tests.js"
+    "start": "node index.js",
+    "watch": "nodemon index.js"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Roman Narvatov <kjiibe@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.13",
