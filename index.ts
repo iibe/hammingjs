@@ -1,10 +1,10 @@
-function encode(bitword) {
+function encode(bitword: string): string {
   if (bitword.match(/[^10]/) && bitword.length > 0) {
     throw new Error("It should be a binary string. E.g 101011");
   }
 
   // find control bits positions
-  const indexes = [];
+  const indexes: number[] = [];
   while (
     indexes.length < Math.ceil(Math.log2(bitword.length + indexes.length + 1))
   ) {
@@ -17,14 +17,16 @@ function encode(bitword) {
   }
 
   // initialize a table of transformation
-  const table = [bitword];
-  for (const _ of indexes) {
-    table.push("");
-  }
+  const table: string[] = [
+    bitword,
+    ...Array.from({ length: indexes.length }, () => ""),
+  ];
 
   // put col number (in binary format) at according col position
   for (let col = 0; col < bitword.length; col++) {
-    const bin = ((col + 1) >>> 0).toString(2).padStart(indexes.length, "0");
+    const bin: string = ((col + 1) >>> 0)
+      .toString(2)
+      .padStart(indexes.length, "0");
 
     for (let row = 1; row < indexes.length + 1; row++) {
       table[row] = table[row].concat(bin[bin.length - row]);
@@ -46,26 +48,28 @@ function encode(bitword) {
   return bitword;
 }
 
-function decode(bitword) {
+function decode(bitword: string): number {
   if (bitword.match(/[^10]/) && bitword.length > 0) {
     throw new Error("It should be a binary string. E.g 101011");
   }
 
   // find control bits positions
-  const indexes = [0, 1];
+  const indexes: number[] = [0, 1];
   while (2 ** indexes.length < bitword.length) {
     indexes.push(2 ** indexes.length - 1);
   }
 
   // initialize a table of transformation
-  const table = [bitword];
-  for (const _ of indexes) {
-    table.push("");
-  }
+  const table: string[] = [
+    bitword,
+    ...Array.from({ length: indexes.length }, () => ""),
+  ];
 
   // put col number (in binary format) at according col position
   for (let col = 0; col < bitword.length; col++) {
-    const bin = ((col + 1) >>> 0).toString(2).padStart(indexes.length, "0");
+    const bin: string = ((col + 1) >>> 0)
+      .toString(2)
+      .padStart(indexes.length, "0");
 
     for (let row = 1; row < indexes.length + 1; row++) {
       table[row] = table[row].concat(bin[bin.length - row]);
@@ -73,9 +77,10 @@ function decode(bitword) {
   }
 
   // calculate matches with control word
-  const error = [];
+  const error: number[] = [];
   for (let row = 1; row < table.length; row++) {
-    let match = 0;
+    let match: number = 0;
+
     for (let col = 0; col < table[0].length; col++) {
       if (table[0][col] === "1" && table[0][col] === table[row][col]) {
         match++;
@@ -104,7 +109,7 @@ console.log("O:", o);
  * @param {string} value Insert value.
  * @return String with with `value` inserted from `index` position.
  */
-function insert(string, index, value) {
+function insert(string: string, index: number, value: string): string {
   return string.slice(0, index) + value + string.slice(index);
 }
 
@@ -115,6 +120,6 @@ function insert(string, index, value) {
  * @param {string} value Replace value.
  * @return String with with `value` replaced from `index` position.
  */
-function replace(string, index, value) {
+function replace(string: string, index: number, value: string): string {
   return string.slice(0, index) + value + string.slice(index + value.length);
 }
