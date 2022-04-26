@@ -1,17 +1,47 @@
 {
+  "private": false,
   "name": "hammingjs",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
+  "description": "Hamming Code implementation in Javascript",
+  "author": "Roman Narvatov <kjiibe@gmail.com>",
+  "license": "MIT",
+  "main": "./src/index.ts",
+  "types": "./dist/hamming.d.ts",
   "scripts": {
-    "start": "node index.ts",
-    "watch": "nodemon index.ts"
+    "start": "node ./src/index.ts",
+    "watch": "nodemon ./src/index.ts",
+    "build": "rimraf dist && rollup --config rollup.config.js && npm run lint:fix",
+    "lint:fix": "prettier --write .",
+    "test": "npx jest",
+    "test:watch": "npx jest --watch",
+    "prepare": "husky install"
   },
-  "author": "Roman Narvatov <kjiibe@gmail.com",
-  "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.13",
-    "prettier": "^2.4.1",
-    "typescript": "^4.5.2"
+    "@rollup/plugin-node-resolve": "^13.2.1",
+    "@rollup/plugin-typescript": "^8.3.2",
+    "@types/jest": "^27.4.1",
+    "deepmerge": "^4.2.2",
+    "husky": "^7.0.4",
+    "jest": "^27.4.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.6.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.70.2",
+    "rollup-plugin-dts": "^4.2.1",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-jest": "^27.1.4",
+    "typescript": "^4.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iibe/hammingjs.git"
+  },
+  "homepage": "https://github.com/iibe/hammingjs#readme",
+  "bugs": {
+    "url": "https://github.com/iibe/hammingjs/issues"
+  },
+  "dependencies": {
+    "@rollup/plugin-strip": "^2.1.0",
+    "rollup-plugin-cleanup": "^3.2.1"
   }
 }
