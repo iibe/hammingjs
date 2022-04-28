@@ -3,9 +3,12 @@ import { encode, detect, decode } from "../src/hamming";
 const message: string = "100100101110001"; // 16-bit binary string
 const encoded: string = "11110010001011110001"; // encoded string
 const pitfall: string = "11110110001011110001"; // 6th bit error
+const binaryCodeRegex: RegExp = /^[01]+$/;
 
 test("validate mock data", () => {
-  expect(message);
+  expect(message).toMatch(binaryCodeRegex);
+  expect(encoded).toMatch(binaryCodeRegex);
+  expect(pitfall).toMatch(binaryCodeRegex);
   expect(message.length).toBeGreaterThan(0);
   expect(encoded.length).toBe(pitfall.length);
   expect(encoded).not.toBe(pitfall);
